@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet">
+<script>
+// script.js
+document.addEventListener("DOMContentLoaded", function() {
+  const hiddenSVG = document.getElementById("hidden-svg");
+  hiddenSVG.style.opacity = 0; // Start with 0 opacity
+  
+  // Start revealing the top of the SVG and increasing opacity
+  let opacity = 0;
+  const opacityInterval = setInterval(() => {
+    opacity += 0.01; // Increase opacity by a small amount
+    hiddenSVG.style.opacity = opacity.toFixed(2);
+    if (opacity >= 1) {
+      clearInterval(opacityInterval);
+    }
+  }, 20); // About 60 frames per second
+  
+  // Reveal the top of the SVG from right to left
+  hiddenSVG.style.clipPath = "polygon(0% 50%,0% 100%,0% 100%,0% 50%,100% 50%,100% 0%,100% 0%,100% 50%,100% 50%,100% 50%)";
+  
+  // After a delay, reveal the bottom of the SVG from left to right
+  setTimeout(() => {
+    hiddenSVG.style.clipPath = "polygon(0% 50%,0% 100%,100% 100%,100% 50%,100% 50%,100% 0%,0% 0%,0% 50%,100% 50%,100% 50%)";
+  }, 500); // Delay for 4 seconds before revealing the bottom
+});
+
+
+</script>
+
+<style>
+/* styles.css */
+body {
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+overflow: hidden;
+background-color: #141414;
+}
+
+.svg-container {
+position: relative;
+width: 50%; /* Match the SVG width */
+height: 50%; /* Match the SVG height */
+overflow: hidden;
+}
+
+#hidden-svg {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+opacity: 0;
+clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+-webkit-clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+transition: clip-path 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+will-change: clip-path;
+animation:draw 3s ease;
+animation-delay: 0.5s;
+}
+
+#ellipse {
+
+    animation: elipsedraw 1.5s ease-in-out !important;
+    
+   
+  
+}
+
+
+
+
+@keyframes draw {
+  0% {
+    stroke-opacity: 1;
+    stroke: white;
+    stroke-dashoffset: 4500;
+    stroke-width: 1px;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  20% {
+    stroke-opacity: 0.8;
+    stroke-dashoffset: 3600;
+    stroke-width: 0.8px;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  40% {
+    stroke-opacity: 0.6;
+    stroke-dashoffset: 2700;
+    stroke-width: 0.6px;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  60% {
+    stroke-opacity: 0.4;
+    stroke-dashoffset: 1800;
+    stroke-width: 0.4px;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  80% {
+    stroke-opacity: 0.2;
+    stroke-dashoffset: 900;
+    stroke-width: 0.2px;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  100% {
+    stroke-opacity: 0;
+    stroke-width: 0px;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+}
+
+  
+@keyframes elipsedraw {
+  0% {
+    stroke-opacity: 1;
+    stroke: red;
+    stroke-dashoffset: 4500;
+    stroke-width: 1px;
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter:blur(10px);
+  }
+
+  50% {
+    stroke-opacity: 0.5;
+    stroke-dashoffset: 3000;
+    stroke-width: 0.5px;
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  100% {
+    stroke-opacity: 0;
+    stroke-width: 0px;
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+}
+
+
+
+
+</style>
+<title>SVG Path Reveal Animation</title>
+</head>
+<body>
+<div class="svg-container">
+<svg id="hidden-svg" width="301" height="232" viewBox="0 0 301 232" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="path1" d="M0.1875 231.125H69.4375C67.743 185.394 43.4796 155.105 43.4796 155.105C39.7598 180.872 14.6031 216.204 0.1875 231.125Z" fill="url(#paint0_linear_86_12)"/>
+<path id="path2" d="M53.5626 177.034C59.4961 189.594 65.6139 207.333 66.8179 228.625H5.88522C12.6489 220.957 20.7838 210.189 27.9743 198.491C35.3572 186.481 41.8785 173.276 44.8058 161.308C44.9339 161.503 45.0649 161.704 45.1987 161.911C47.4484 165.385 50.4778 170.504 53.5626 177.034Z" stroke="url(#paint1_linear_86_12)" stroke-opacity="0.85" stroke-width="5"/>
+<path id="path3" d="M201.591 0.375H105.282L104.924 1.19782C104.75 1.59935 104.693 2.04218 104.76 2.47483C104.872 3.19839 105.323 3.82112 105.957 4.18755C116.777 10.4413 123.756 23.4749 125.938 29.375L196.438 189.125C203.038 207.725 195.355 223.875 190.688 229.625L190.102 230.296C189.819 230.619 190.048 231.125 190.478 231.125H191.938H299.626H299.987C300.205 231.125 300.317 230.864 300.168 230.706C299.022 229.492 297.675 228.5 296.373 227.456C287.765 220.558 275.574 199.819 270.188 189.125C248.855 142.708 204.888 45.775 199.688 29.375C195.683 16.7412 197.849 9.32973 200.54 5.79192C201.675 4.30034 202.475 2.32109 201.846 0.555252C201.808 0.447182 201.706 0.375 201.591 0.375Z" fill="url(#paint2_linear_86_12)"/>
+<path id="path4" d="M279.976 211.076C284.455 217.97 289.451 224.727 293.88 228.625H194.472C199.349 221.002 204.958 205.658 198.795 188.289L198.763 188.201L198.726 188.116L128.256 28.4344C127.08 25.2786 124.698 20.39 121.23 15.4729C118.022 10.9262 113.794 6.22402 108.602 2.875H199.355C199.195 3.29828 198.935 3.77267 198.551 4.2781C195.209 8.67011 193.144 17.0075 197.305 30.1306C199.96 38.503 212.335 67.0121 226.605 99.012C240.919 131.109 257.248 166.955 267.917 190.169L267.936 190.21L267.956 190.249C270.687 195.673 275.126 203.612 279.976 211.076Z" stroke="url(#paint3_linear_86_12)" stroke-opacity="0.9" stroke-width="5" stroke-miterlimit="16"/>
+<ellipse id="ellipse" cx="97.1877" cy="115.875" rx="36.5002" ry="36.5002" fill="url(#paint4_radial_86_12)"/>
+<path d="M132.688 115.875C132.688 135.481 116.794 151.375 97.1877 151.375C77.5815 151.375 61.6875 135.481 61.6875 115.875C61.6875 96.2685 77.5815 80.3745 97.1877 80.3745C116.794 80.3745 132.688 96.2685 132.688 115.875Z" stroke="url(#paint5_radial_86_12)" stroke-opacity="0.5" stroke-width="2"/>
+<defs>
+<linearGradient id="paint0_linear_86_12" x1="10.3853" y1="135.876" x2="59.662" y2="233.762" gradientUnits="userSpaceOnUse">
+<stop offset="0.223363" stop-color="#E4E4E4"/>
+<stop offset="0.375339" stop-color="#8C8C8C"/>
+<stop offset="0.526042" stop-color="#D8D8D8"/>
+<stop offset="0.598958" stop-color="#ECECEC"/>
+<stop offset="0.67729" stop-color="#FCFCFC"/>
+<stop offset="0.799544" stop-color="#E2E2E2"/>
+<stop offset="0.918562" stop-color="#D3D3D3"/>
+</linearGradient>
+<linearGradient id="paint1_linear_86_12" x1="16.8644" y1="126.601" x2="58.0858" y2="236.4" gradientUnits="userSpaceOnUse">
+<stop stop-color="#C1C4C1"/>
+<stop offset="0.241068" stop-color="#8C8C8C"/>
+<stop offset="0.290126" stop-color="#BFBFBF"/>
+<stop offset="0.503962" stop-color="#EDEDED"/>
+<stop offset="0.670703" stop-color="#E5E6E5"/>
+<stop offset="0.794246" stop-color="#D3D3D3"/>
+<stop offset="0.850811" stop-color="#C4C4C4"/>
+<stop offset="1" stop-color="#B4B4B4"/>
+</linearGradient>
+<linearGradient id="paint2_linear_86_12" x1="109.688" y1="2.625" x2="291.237" y2="216.889" gradientUnits="userSpaceOnUse">
+<stop offset="0.119453" stop-color="#EAEAEA"/>
+<stop offset="0.202862" stop-color="#D0D0D0"/>
+<stop offset="0.286347" stop-color="#C3C4C3"/>
+<stop offset="0.401654" stop-color="#E1E1E1"/>
+<stop offset="0.471834" stop-color="#EAEAEA"/>
+<stop offset="0.549987" stop-color="#FCFCFC"/>
+<stop offset="0.744792" stop-color="#E6E6E6"/>
+<stop offset="1" stop-color="#D3D3D3"/>
+</linearGradient>
+<linearGradient id="paint3_linear_86_12" x1="103.688" y1="-45.375" x2="286.474" y2="231.804" gradientUnits="userSpaceOnUse">
+<stop offset="0.106744" stop-color="#898989"/>
+<stop offset="0.187332" stop-color="#DCDCDC"/>
+<stop offset="0.227853" stop-color="#C1C4C1"/>
+<stop offset="0.279153" stop-color="#8C8C8C"/>
+<stop offset="0.310636" stop-color="#BFBFBF"/>
+<stop offset="0.503962" stop-color="#FCFCFC"/>
+<stop offset="0.761696" stop-color="#E5E6E5"/>
+<stop offset="0.794246" stop-color="#D3D3D3"/>
+<stop offset="0.810773" stop-color="#C4C4C4"/>
+<stop offset="0.97275" stop-color="#B4B4B4"/>
+<stop offset="1" stop-color="#898989"/>
+</linearGradient>
+<radialGradient id="paint4_radial_86_12" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(72.1874 84.3749) rotate(45) scale(234.052 1363.69)">
+<stop stop-color="#FF6D6D"/>
+<stop offset="0.0236275" stop-color="#FFCECE"/>
+<stop offset="0.0715775" stop-color="#FF5757"/>
+<stop offset="0.14663" stop-color="#DF0000"/>
+<stop offset="0.187537" stop-color="#E30202" stop-opacity="0.937495"/>
+<stop offset="0.23372" stop-color="#FF0F00" stop-opacity="0.71"/>
+<stop offset="0.259063" stop-color="#D60000" stop-opacity="0.72"/>
+<stop offset="0.294853" stop-color="#9B0000" stop-opacity="0.74"/>
+</radialGradient>
+<radialGradient id="paint5_radial_86_12" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(66.4375 84.3749) rotate(65.6671) scale(74.6296 74.6295)">
+<stop stop-color="#FF5858"/>
+<stop offset="0.0341753" stop-color="#FF3434"/>
+<stop offset="0.164971" stop-color="#FF9999" stop-opacity="0"/>
+<stop offset="0.311021" stop-color="#FF6161"/>
+<stop offset="0.539977" stop-color="#FF5B5B" stop-opacity="0.73"/>
+<stop offset="0.619792" stop-color="#FFA3A3" stop-opacity="0.46545"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
+</div>
+</body>
+</html>
